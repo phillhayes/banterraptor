@@ -5,6 +5,9 @@ gem 'rails', '4.0.4'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
@@ -14,6 +17,8 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+
+gem 'bootstrap-sass', '~> 3.1.1.1'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -26,6 +31,9 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+
+gem "nifty-generators", :group => :development
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -43,3 +51,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem "mocha", group: :test

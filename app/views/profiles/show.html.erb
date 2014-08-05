@@ -1,0 +1,27 @@
+<h1><%= current_user.first_name %> </h1>
+<p><%= current_user.profile.bio %></p>
+<% if @groups %>
+<ul class="list-group">
+    <% @groups.each do |group| %>
+      <li class="list-group-item">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="..." alt="...">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><%= group.name %></h4>
+            
+            <p><%= group.description %></p>
+            <div class="btn-group">
+              <%= link_to 'Edit', edit_group_path(group), class: "btn btn-default" %>
+              <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+              <%= link_to 'View', group_path(group), class: "btn btn-default" %>
+            </div>
+          </div>
+          
+        </div>
+      
+      </li>
+    <% end %>
+  </ul>
+  <% end %>

@@ -1,5 +1,31 @@
 Banterraptor::Application.routes.draw do
+  resources :profiles
+
+  get "profiles/show"
+  resources :groups
+
+
+  get "static_pages/home"
+  get "static_pages/about"
+  resources :authentications
+  match '/auth/:provider/callback' => "authentications#create", via: [:get] 
+  devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :statuses
+
+  resources :profiles do
+  member do
+    get :groups
+  end
+end
+
+  
+  authenticated do
+    root :to => 'groups#index', as: :authenticated
+  end
+
+  root 'static_pages#home'
+  
+  get ':id' => 'profiles#show', :as => :profile_show
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

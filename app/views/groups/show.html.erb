@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" src="..." alt="...">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"><%= @group.name %></h4>
+   
+    <p><%= @group.description %></p>
+    <p><%= @group.user.full_name %></p>
+  </div>
+</div>
+
+<% if @statuses %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Content</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @statuses.each do |status| %>
+      <tr>
+         <td><%= status.user.full_name %></td>
+        <td><%= status.content %></td>
+        <td><%= link_to 'Show', status %></td>
+        <td><%= link_to 'Edit', edit_status_path(status) %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+
+
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>
