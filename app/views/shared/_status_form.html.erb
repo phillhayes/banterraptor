@@ -1,0 +1,11 @@
+<%= form_for(@status) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.label :group_id %><br>
+    <%= f.number_field :group_id %>
+  </div> 
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Compose new Post..." %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>

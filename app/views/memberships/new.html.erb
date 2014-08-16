@@ -1,0 +1,15 @@
+<% if @group %>
+
+<h1><%= @group.name %></h1>
+
+<p>Do you really want to join <%= @group.name %>? %></p>
+
+<%= form_for @membership do |f| %>
+	<div class="form">
+		<% f.hidden_field :group_id, value: params[:group_id] %>
+		<%= f.submit "Yes Please!", class: 'btn btn-primary' %>
+		<%= link_to "Errr, No!",  class: 'btn' %>
+	</div>
+<% end %>
+
+<% end %>

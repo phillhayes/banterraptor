@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
 	has_many :authentications
-  has_many :memberships
-  has_many :groups
+  has_many :memberships, :dependent => :destroy
+  has_many :groups, :through => :memberships
   has_one :profile, :dependent => :destroy
-  has_many :statuses
-  accepts_nested_attributes_for :profile, :allow_destroy => true
+  has_many :statuses, :dependent => :destroy
+  
+
   
   before_create :create_profile
 
@@ -27,5 +28,23 @@ class User < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+  def feed
+    Status.from_groups_member_of(self)
+  end
+
+ 
+
+
+  def group_feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Status.all
+
+
+  end
+
+  def my_groups
+    Group.is_member_of(self)
+  end
+
 
 end

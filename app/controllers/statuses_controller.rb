@@ -2,11 +2,25 @@ class StatusesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
   before_action :set_status, only: [:show, :edit, :update, :destroy]
 
+
   # GET /statuses
   # GET /statuses.json
   def index
     @statuses = Status.all
   end
+
+   def status
+    @user = User.find_by_user_name(params[:id])
+    @status = @user.status
+  end 
+
+   def user
+    @user = current_user
+  end 
+  def group
+     @group = Group.find(params[:group_id])
+  end 
+
 
   # GET /statuses/1
   # GET /statuses/1.json
@@ -25,28 +39,31 @@ class StatusesController < ApplicationController
   # POST /statuses
   # POST /statuses.json
   def create
-    @status = Status.new(status_params)
-
-    respond_to do |format|
+    @group = Group.find(params[:group_id])
+  if group.users.include? current_user
+    @status = @group.statuses.build(status_params.merge(:user_id => current_user.id))
       if @status.save
-        format.html { redirect_to @status, notice: 'Status was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @status }
+        flash[:notice] = "Banter Posted!"
+        redirect_to @group
       else
-        format.html { render action: 'new' }
-        format.json { render json: @status.errors, status: :unprocessable_entity }
+        flash[:alert] = "You aren't a member of this group"
+        redirect_to @group
       end
+    else
+      flash[:alert] = 'You arent a member of this group - click "Join" to get started'
+      redirect_to @group 
     end
   end
 
   # PATCH/PUT /statuses/1
   # PATCH/PUT /statuses/1.json
   def update
-    respond_to do |format|
-      if @status.update(status_params)
+     respond_to do |format|
+      if @status.update_attributes(status_params)
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
@@ -62,14 +79,18 @@ class StatusesController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_status
-      @status = Status.find(params[:id])
+     @status = current_user.statuses.find(params[:id])
+     
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
-      params.require(:status).permit(:user_id, :content, :group_id)
+      params.require(:status).permit(:content, :group_id, :user_id)
     end
+
 end

@@ -1,4 +1,44 @@
-<div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<% if user_signed_in? %>
+   <div class="row">
+    <aside class="col-sm-3">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="panel panel-default">
+        <div class="panel-body">
+          <h5>Create a new group</h5>
+          <%= render 'shared/group_form' %>
+          <%= link_to 'All Groups', groups_path, class: "btn btn-success" %>
+        </div>
+
+      </section>
+      
+    </aside>
+    
+    <div class="col-sm-6 panel panel-default">
+      
+        <h5>What's Banter?</h5>
+        <ul class="list-group" id="statuses">
+         <%= render :partial => current_user.feed %>
+        </ul>
+
+    </div>
+    
+<aside class="col-sm-3">
+    <section>
+        <div >
+          <h5>My Groups</h5>
+          <ul class="list-group" id="statuses">
+          <%= render :partial => current_user.groups %>
+         </ul>
+        </div>
+</aside>
+      </section>
+  </div>
+  </div>
+<% else %>
+  <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,10 +46,13 @@
       </div>
       <div class="modal-body home-modal">
         <h4> Join BanterRaptor and See How Valuable Your Comments Are</h4>
-		<a href="/auth/twitter"><button class="btn btn-lg btn-social center-block btn-twitter"><i class="fa fa-twitter"></i>  Continue with Twitter</button></a>
+    <a href="/auth/twitter"><button class="btn btn-lg btn-social center-block btn-twitter"><i class="fa fa-twitter"></i>  Continue with Twitter</button></a>
+    <%= link_to "Sign Up Manually", new_user_registration_path, class: "btn btn-lg btn-social btn-primary center-block" %>
       </div>
     </div>
   </div>
 </div>
 
+
+<% end %>
 

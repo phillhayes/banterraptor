@@ -6,27 +6,76 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.all
+    @membership = Membership.new
+    @user = current_user
   end
+
+   
+
+  def join
+    @group = Group.find(params[:id])
+    @m = @group.memberships.build(:user_id => current_user.id)
+      if @m.save
+        flash[:notice] = 'You have joined this group.'
+        redirect_to @group
+      else
+        if !@group.user_quota
+          flash[:alert] = "There was a problem joining this group. Check back later"
+          redirect_to @group
+        else
+          flash[:alert] = 'You have joined too many groups - try again later'
+          redirect_to @group
+        end
+      end
+  
+  end
+  
+  def user
+    @group = Group.find(params[:id])
+    @user = @user.group
+  end 
 
   # GET /groups/1
   # GET /groups/1.json
 
-  def statuses
-    @group = Group.find(params[:id])
-    @statuses = @group.statuses
+  def status
+    @user = User.find(params[:id])
+    @status = @user.status
   end 
+def group
+     @group = Group.find(params[:id])
+  end 
+ 
+
 
   def show
+    @membership = Membership.new
+    @user = current_user
     @group = Group.find(params[:id])
-    if @group
-      @statuses = @group.statuses
-      render action: :show
+    if group.users.include? current_user
+      @status = Status.new
+      @group = Group.find(params[:id])
+      
+
+    else
+      if @user.memberships.count >= 3
+        flash[:alert] = "You have joined too many groups! Leave a group to proceed"
+        redirect_to root_path
+      else
+        flash[:alert] = "You aren't a member"
+      end
+      
     end
+    
+
+    
   end
 
   # GET /groups/new
   def new
     @group = Group.new
+   @group.statuses.build
+    
   end
 
   # GET /groups/1/edit
@@ -36,19 +85,16 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = current_user.groups.build(group_params)
-  
-
-    respond_to do |format|
-      if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @group }
+    @group = current_user.groups.build(group_params.merge(:user_id => current_user.id))
+    @m = @group.memberships.build(:user_id => current_user.id)
+      if @group.save && @m.save
+        flash[:notice] = "Group created!"
+        redirect_to root_url
       else
-        format.html { render action: 'new' }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+        flash[:alert] = "You are already a member of too many groups. Leave one to proceed."
+        redirect_to root_path
       end
     end
-  end
 
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
@@ -82,6 +128,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :description, :user_id)
+      params.require(:group).permit(:name, :description, :group_id, :user_id, new_status_attributes: [:group_id, :content, :user_id])
     end
 end

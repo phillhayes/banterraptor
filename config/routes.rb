@@ -1,16 +1,41 @@
 Banterraptor::Application.routes.draw do
+
+
+  resources :groups do
+    member do
+      get :users, :statuses
+    end
+  end
   resources :profiles
 
   get "profiles/show"
   resources :groups
+  resources :memberships
 
 
   get "static_pages/home"
   get "static_pages/about"
+  get "static_pages/group_page"
   resources :authentications
   match '/auth/:provider/callback' => "authentications#create", via: [:get] 
   devise_for :users, :controllers => {:registrations => 'registrations'}
+  resources :groups do
+    resources :statuses, :only => [:create, :update]
+  end
   resources :statuses
+  
+  resources :groups, only: [:show], shallow: true do
+    resources :memberships, :only => [:create, :update]
+  end
+
+  resources :groups, only: [:show], shallow: true do
+   resources :membership, only: [:new] #-> domain.com/2/memberships/new
+end
+
+resources :groups do
+   resources :memberships, only: [:destroy] #-> domain.com/2/memberships/new
+end
+
 
   resources :profiles do
   member do
@@ -18,10 +43,9 @@ Banterraptor::Application.routes.draw do
   end
 end
 
+get 'static_pages/:id/group_page' => 'static_pages#group_page'
   
-  authenticated do
-    root :to => 'groups#index', as: :authenticated
-  end
+
 
   root 'static_pages#home'
   

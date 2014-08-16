@@ -12,11 +12,17 @@
           <div class="media-body">
             <h4 class="media-heading"><%= group.name %></h4>
             
+            
             <p><%= group.description %></p>
             <div class="btn-group">
               <%= link_to 'Edit', edit_group_path(group), class: "btn btn-default" %>
               <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
-              <%= link_to 'View', group_path(group), class: "btn btn-default" %>
+              <%= link_to 'View', group_path(group), :user_id =>  current_user.id, class: "btn btn-default" %>
+             
+  
+
+  
+              
             </div>
           </div>
           

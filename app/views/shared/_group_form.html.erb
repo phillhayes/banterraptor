@@ -1,0 +1,11 @@
+
+  
+
+<%= simple_form_for [ Group.new] do |f| %>
+
+
+  	<%= f.input :name, placeholder: "Group Name" %>
+    <%= f.input :description, as: :text, placeholder: "Compose new Post..." %>
+
+        <p><%= f.submit "Post" %></p>
+<% end %>

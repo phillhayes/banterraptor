@@ -1,0 +1,11 @@
+<li id="<%= feed_item.id %>">
+  
+  <span class="user">
+    <%= feed_item.user.full_name %>
+  </span>
+  <span class="content"><%= feed_item.description %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+  </span>
+  <%= link_to 'View', '/static_pages/group_page', class: "btn btn-default" %>
+</li>

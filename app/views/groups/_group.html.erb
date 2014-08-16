@@ -1,0 +1,9 @@
+<%= div_for group, class: "list-group-item" do %>
+        
+               <h4> <%= group.name %> </h4>
+               <% if !current_page?('/') %>
+                <%= group.description %>
+                <% end %>
+                <%= link_to 'View', group_path(group), class: "btn btn-default" %>
+             
+<% end %>

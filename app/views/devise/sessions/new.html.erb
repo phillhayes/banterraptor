@@ -10,6 +10,7 @@
   <% if devise_mapping.rememberable? -%>
     <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
   <% end -%>
+  <a href="/auth/twitter"><button class="btn btn-lg btn-social center-block btn-twitter"><i class="fa fa-twitter"></i>  Continue with Twitter</button></a>
 
   <div><%= f.submit "Sign in" %></div>
 <% end %>

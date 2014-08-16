@@ -1,0 +1,32 @@
+    <div class="well">
+      <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="..." alt="...">
+          </a>
+          <div class="media-body">
+            <h1 class="media-heading"><%= @group.name %></h1>
+            <h3><%= @group.description %></h3>
+            
+            <p></p>
+            <div class="btn-group">
+             
+              <%= link_to 'Destroy', @group, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+           
+              <%= link_to 'Back', groups_path, class: "btn btn-default" %>
+              
+              
+              
+
+              <% if user_signed_in? %>
+                  <% if !@group.users.include? current_user %>
+                    <%= simple_form_for [@group, @membership] do |f| %>
+                       <%= f.submit "Join", class: "btn btn-primary btn-sm" %>
+                    <% end %>
+                    <% else %>
+                    <%= link_to 'Leave Group', group_membership_path(@group, current_user ), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+                  <% end %>
+               <% end %>
+            </div>
+          </div>
+         </div>
+       </div>

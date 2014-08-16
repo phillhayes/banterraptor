@@ -1,0 +1,18 @@
+
+<%= div_for status, class: "list-group-item" do %>
+        
+                <strong>
+                		<%= status.user.full_name %></strong>
+                        <small>Posted in <%= status.group_id %> <%= time_ago_in_words(status.created_at) %> ago</small>
+                
+                <br/>
+                <%= status.content %>
+                <% if !current_page?('/') %>
+                   <% if current_user.statuses.include? status %>
+                	<%= link_to 'Edit', edit_status_path(status.id)%> 
+                	<% end %>
+     			<% end %>
+
+     			
+ 
+<% end %>

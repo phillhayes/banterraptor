@@ -25,13 +25,38 @@ body.home:before {
 -ms-filter: blur(1px);
 }
 
-.modal-body{
+.home-modal{
     background-image: url('new-york-city.jpg');
     background-size: cover;
     background-size: 100% auto; 
     color:white;
     min-height:300px;
 }
+
+.nav_home{
+  background-color:purple !important;
+  color:white !important;
+}
+
+.navbar .nav > li > a {
+    float: none !important;
+    line-height: 19px !important;
+    padding: 15px 10px 11px !important;
+    text-decoration: none !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+    color:  #fff !important;
+}
+.well{
+  padding:0.5px !important;
+
+  background-color:white !important;
+}
+.panel{
+  padding:0.5px !important;
+
+  background-color:white !important;
+}
+
 
 
 .btn-twitter {
@@ -49,6 +74,7 @@ body.home:before {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2daddc', endColorstr='#ff0271bf', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  text-decoration:none;
 }
 
 .btn-twitter:hover,
@@ -60,6 +86,7 @@ body.home:before {
   color: #ffffff;
   background-color: #0271bf;
   *background-color: #0262a6;
+  text-decoration:none;
 }
 
 .btn-twitter:active,
