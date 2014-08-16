@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.4'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
@@ -38,9 +38,11 @@ group :production do
   gem 'rails_12factor', '0.0.2'
 end
 
+group :development do
 
-gem "nifty-generators", :group => :development
-
+	gem "nifty-generators"
+	gem 'sqlite3'
+end
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

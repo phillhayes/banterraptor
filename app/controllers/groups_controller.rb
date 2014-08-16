@@ -60,7 +60,7 @@ def group
     else
       if @user.memberships.count >= 3
         flash[:alert] = "You have joined too many groups! Leave a group to proceed"
-        redirect_to root_path
+        redirect_to groups_path
       else
         flash[:alert] = "You aren't a member"
       end
@@ -85,7 +85,7 @@ def group
   # POST /groups
   # POST /groups.json
   def create
-    @group = current_user.groups.build(group_params.merge(:user_id => current_user.id))
+    @group = current_user.groups.build(group_params.merge(:user_id => current_user.id, :creator_id => current_user.id))
     @m = @group.memberships.build(:user_id => current_user.id)
       if @group.save && @m.save
         flash[:notice] = "Group created!"
@@ -128,6 +128,6 @@ def group
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :description, :group_id, :user_id, new_status_attributes: [:group_id, :content, :user_id])
+      params.require(:group).permit(:name, :description, :group_id, :user_id, :creator_id, new_status_attributes: [:group_id, :content, :user_id])
     end
 end

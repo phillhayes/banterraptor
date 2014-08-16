@@ -4,7 +4,9 @@
 
 <ul class="list-group">
     <% @groups.each do |group| %>
-      <li class="list-group-item">
+       
+        <li class="list-group-item">
+        
         <div class="media">
           <a class="pull-left" href="#">
             <img class="media-object" src="..." alt="...">
@@ -14,11 +16,23 @@
             
             
             <p><%= group.description %></p>
+            <div class="dropdown">
+             
+               <%= render :partial => group.memberships %>
+            
+            </div>
+          <br>
             <div class="btn-group">
+              <% if current_user.id = group.creator_id %>
               <%= link_to 'Edit', edit_group_path(group), class: "btn btn-default" %>
               <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
-              <%= link_to 'View', group_path(group), :user_id =>  current_user.id, class: "btn btn-default" %>
-             
+              <% end %>
+              <% if group.users.include? current_user %>
+
+                <%= link_to 'View', group_path(group), :user_id =>  current_user.id, class: "btn btn-primary" %>
+             <% else %>
+                <%= link_to 'View', group_path(group), :user_id =>  current_user.id, class: "btn btn-default" %>
+             <% end %>
   
 
   

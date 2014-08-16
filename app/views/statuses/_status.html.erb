@@ -3,7 +3,8 @@
         
                 <strong>
                 		<%= status.user.full_name %></strong>
-                        <small>Posted in <%= status.group_id %> <%= time_ago_in_words(status.created_at) %> ago</small>
+                		<% @group = Group.find(status.group_id) %>
+                        <small>Posted in <strong><%= link_to @group.name, @group  %></strong> <%= time_ago_in_words(status.created_at) %> ago</small>
                 
                 <br/>
                 <%= status.content %>
