@@ -7,9 +7,9 @@
       </section>
       <section class="panel panel-default">
         <div class="panel-body">
-          <h5>Create a new group</h5>
+          <h5>Create a new group or <%= link_to 'All Groups', groups_path, class: "btn btn-success" %></h5>
           <%= render 'shared/group_form' %>
-          <%= link_to 'All Groups', groups_path, class: "btn btn-success" %>
+          
         </div>
 
       </section>
