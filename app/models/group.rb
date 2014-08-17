@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
 	
 	default_scope -> { order('created_at DESC') }
 	validate :user_quota, :on => :create  
+  validates_presence_of :name, :description
 
   def user_quota
    if user.groups.count >= 3

@@ -45,6 +45,9 @@ class StatusesController < ApplicationController
       if @status.save
         flash[:notice] = "Banter Posted!"
         redirect_to @group
+      elsif @status.content
+        flash[:alert] = "Your banter was empty. That's not cool!"
+        redirect_to @group
       else
         flash[:alert] = "You aren't a member of this group"
         redirect_to @group

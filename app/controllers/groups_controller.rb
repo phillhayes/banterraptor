@@ -90,6 +90,9 @@ def group
       if @group.save && @m.save
         flash[:notice] = "Group created!"
         redirect_to root_url
+      elsif @group.name = "" || @group.description = ""
+        flash[:alert] = "Your group needs a name & a description!"
+        redirect_to root_path
       else
         flash[:alert] = "You are already a member of too many groups. Leave one to proceed."
         redirect_to root_path
