@@ -24,7 +24,7 @@
           <br>
             <div class="btn-group">
               <% if current_user.id = group.creator_id %>
-              <%= link_to 'Edit', edit_group_path(group), class: "btn btn-default" %>
+          
               <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
               <% end %>
               <% if group.users.include? current_user %>
@@ -48,4 +48,4 @@
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
+
