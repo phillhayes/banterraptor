@@ -2,7 +2,7 @@
 <%= div_for status, class: "list-group-item" do %>
        <div class="media">
             <a class="pull-left" href="#">
-                <%= image_tag status.user.profile.url, class: "img img-responsive media-object thumbnail" %>
+                <%= image_tag status.user.profile.url(:thumb), class: "img img-responsive media-object thumbnail" %>
             </a>
             <div class="media-body">
                 <h4 class="media-heading"><%= status.user.full_name %></h4><% @group = Group.find(status.group_id) %>
