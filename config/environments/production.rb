@@ -82,9 +82,9 @@ Banterraptor::Application.configure do
   config.paperclip_defaults = {
   :storage => :s3,
   :s3_credentials => {
-    :bucket => ENV['banterraptor-assets'],
-    :access_key_id => ENV['AKIAJFI5SXIHF4UOPINA'],
-    :secret_access_key => ENV['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']
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
   }
 }
 end
