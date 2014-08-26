@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-body">
 <h3>
-	<%= image_tag current_user.profile.url, class: "img img-responsive center-block profile-pic" %><br>
+	<%= image_tag current_user.profile.url(:small), class: "img img-responsive center-block profile-pic" %><br>
   <h1 class="center-block"><%= current_user.full_name %></h1>
 </h3>
 </div>
