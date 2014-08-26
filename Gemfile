@@ -28,6 +28,7 @@ gem 'simple_form', '~> 3.1.0.rc1'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'aws-sdk'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
