@@ -3,7 +3,7 @@ class Membership < ActiveRecord::Base
 	belongs_to :group
 	validates_uniqueness_of :user_id, :alert => "can be only joined once", :scope => 'group_id'
 	validate :membership_quota, :on => :create  
-
+has_reputation :likes, source: {reputation: :likes, of: :statuses, scope: :memberships }, aggregated_by: :sum
   def membership_quota
     if user
      if user.memberships.count >= 3

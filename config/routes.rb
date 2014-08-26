@@ -22,8 +22,9 @@ Banterraptor::Application.routes.draw do
   resources :groups do
     resources :statuses, :only => [:create, :update]
   end
-  resources :statuses
-  
+  resources :statuses do
+    member { post :like }
+  end
   resources :groups, only: [:show], shallow: true do
     resources :memberships, :only => [:create, :update]
   end

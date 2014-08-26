@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
+  has_many :evaluations, class_name: "RSEvaluation", as: :source
 	has_many :authentications
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
   has_one :profile, :dependent => :destroy
   has_many :statuses, :dependent => :destroy
-  
+  has_reputation :likes, source: {reputation: :likes, of: :statuses, scope: :group }, aggregated_by: :sum
 
   
   before_create :create_profile

@@ -11,7 +11,7 @@ class StatusesController < ApplicationController
 
    def status
     @user = User.find_by_user_name(params[:id])
-    @status = @user.status
+  
   end 
 
    def user
@@ -34,6 +34,14 @@ class StatusesController < ApplicationController
 
   # GET /statuses/1/edit
   def edit
+  end
+
+  def like
+    value = params[:type] == "up" ? 1 : -1
+    @status = Status.find(params[:id])
+    @user = @status.user
+    @status.add_or_update_evaluation(:likes, value, current_user, :group)
+    redirect_to :back, notice: "Thanks for rating Banter!"
   end
 
   # POST /statuses

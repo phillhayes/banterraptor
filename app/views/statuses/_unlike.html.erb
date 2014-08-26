@@ -1,0 +1,4 @@
+<%= form_for(@status.likes.find_by(likeded_id: @user.id),
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "Unlike", class: "btn btn-large" %>
+<% end %>
