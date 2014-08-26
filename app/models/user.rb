@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   has_one :profile, :dependent => :destroy
   has_many :statuses, :dependent => :destroy
   has_reputation :likes, source: {reputation: :likes, of: :statuses, scope: :group }, aggregated_by: :sum
-
+  has_attached_file :profile, :styles => { :medium => "300x300>", :thumb => "50x50>", :small  => "150x150>", }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :profile, :content_type => /\Aimage\/.*\Z/
   
   before_create :create_profile
 

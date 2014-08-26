@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822195627) do
+ActiveRecord::Schema.define(version: 20140826201733) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -105,6 +105,10 @@ ActiveRecord::Schema.define(version: 20140822195627) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "group_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "statuses", ["group_id"], name: "index_statuses_on_group_id"
@@ -127,6 +131,10 @@ ActiveRecord::Schema.define(version: 20140822195627) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "bio"
+    t.string   "profile_file_name"
+    t.string   "profile_content_type"
+    t.integer  "profile_file_size"
+    t.datetime "profile_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -19,8 +19,9 @@
   <div class="panel-body">
    
 
-    <%= simple_form_for [@group, Status.new] do |f| %>
-                          <%= f.input :content,as: :text, class: "form-group"  %>
+    <%= simple_form_for [@group, Status.new], :html => { :multipart => true } do |f| %>
+                          <%= f.input :content, as: :text, class: "form-group"  %>
+                          <%= f.file_field :photo, class: "form-group"  %>
 
             <%= f.submit "Post", class: "btn btn-primary" %>
     <% end %>

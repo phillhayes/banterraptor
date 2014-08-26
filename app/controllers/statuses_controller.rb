@@ -85,7 +85,7 @@ class StatusesController < ApplicationController
   def destroy
     @status.destroy
     respond_to do |format|
-      format.html { redirect_to statuses_url }
+      format.html { redirect_to root_path, notice: 'Banter was deleted' }
       format.json { head :no_content }
     end
   end
@@ -101,7 +101,7 @@ class StatusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
-      params.require(:status).permit(:content, :group_id, :user_id)
+      params.require(:status).permit(:content, :group_id, :user_id, :photo)
     end
 
 end

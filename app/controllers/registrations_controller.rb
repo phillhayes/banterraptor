@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+	skip_before_filter :require_no_authentication
+  before_filter :authenticate_user!
 	before_filter :configure_permitted_parameters, if: :devise_controller?
 	def create
 		super
@@ -21,18 +23,14 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def configure_permitted_parameters
 	    devise_parameter_sanitizer.for(:sign_up) do |u|
-	      u.permit(:first_name, :last_name, :user_name, :email, :password, :password_confirmation, profile_attributes: [:bio], status_attributes: [:content, :id])
+	      u.permit(:first_name, :last_name, :user_name, :email, :password)
 	    end
-	    devise_parameter_sanitizer.sanitize(:account_update) do |u|
-	      u.permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, profile_attributes: [:bio], status_attributes: [:content, :id] )
+	    devise_parameter_sanitizer.for(:account_update) do |u|
+	      u.permit(:first_name, :last_name, :username, :email, :password, :profile, :current_password)
 	    end
+
 	end
-	def profile_params
-      params.require(:profile).permit(:user_id, :bio)
-    end
-    def profile_params
-      params.require(:status).permit(:status, :id)
-    end
+	
 
 	
 end
