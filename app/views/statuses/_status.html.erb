@@ -9,7 +9,7 @@
                         <small>Posted in <strong><%= link_to @group.name, @group  %></strong> <%= time_ago_in_words(status.created_at) %> ago</small>
                       <p>
                         <% if status.photo.exists? %>
-                            <%= image_tag status.photo.url, class: "img img-responsive" %>
+                            <%= image_tag status.photo.url(:medium), class: "img img-responsive" %>
                          <% end %>
                         </p>
                         <p>

@@ -20,8 +20,9 @@
    
 
     <%= simple_form_for [@group, Status.new], :html => { :multipart => true } do |f| %>
-                          <%= f.input :content, as: :text, class: "form-group"  %>
-                          <%= f.file_field :photo, class: "form-group"  %>
+                          <%= f.input :content, :label => "Banter", as: :text, class: "form-group"  %>
+                          <strong>Upload Photo</strong> <small>Description can't be blank</small>
+                          <%= f.file_field :photo, :label => "Photo Upload", class: "form-group"  %>
 
             <%= f.submit "Post", class: "btn btn-primary" %>
     <% end %>
