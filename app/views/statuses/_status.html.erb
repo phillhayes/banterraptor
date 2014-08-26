@@ -9,8 +9,10 @@
                 <br/>
                 <%= status.content %>
                 <%= pluralize status.reputation_for(:likes, :group).to_i, "like" %>
+                <% if status.user.full_name == current_user.full_name %>
                 <%= link_to "Like", like_status_path(status, type: "up"), :method => "post" %> 
                 <%= link_to "Dislike", like_status_path(status, type: "down"), :method => "post" %> 
+                <% end %>
                 <% if !current_page?('/') %>
                    <% if current_user.statuses.include? status %>
                 	<%= link_to 'Edit', edit_status_path(status.id)%> 
