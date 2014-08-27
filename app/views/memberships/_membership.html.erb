@@ -2,7 +2,7 @@
         
                 <div class="media">
             <a class="pull-left" href="#">
-                <%= image_tag membership.user.profile.url, class: "img img-responsive media-object thumbnail" %>
+                <%= image_tag membership.user.profile.url(:thumb), class: "img img-responsive media-object thumbnail" %>
             </a>
             <div class="media-body">
                 <h4 class="media-heading"><%= membership.user.full_name %></h4>
